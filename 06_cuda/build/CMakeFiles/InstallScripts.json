@@ -1,0 +1,7 @@
+{
+	"InstallScripts" : 
+	[
+		"C:/Tools/Proyectos/CUDA/06_cuda/build/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

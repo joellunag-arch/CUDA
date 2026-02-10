@@ -1,0 +1,85 @@
+[bookmarks] Loaded 0 bookmarks
+[proc] Executing command: C:\tools\mingw64\bin\cmake.EXE --version
+[proc] Executing command: C:\tools\mingw64\bin\cmake.EXE -E capabilities
+[kit] Successfully loaded 5 kits from C:\Users\fing.labcom\AppData\Local\CMakeTools\cmake-tools-kits.json
+[variant] Loaded new set of variants
+[proc] Executing command: chcp
+[main] Configuring project: 06_cuda 
+[proc] Executing command: C:\tools\mingw64\bin\cmake.EXE -DCMAKE_TOOLCHAIN_FILE:STRING=C:/tools/vcpkg/scripts/buildsystems/vcpkg.cmake -DVCPKG_TARGET_TRIPLET:STRING=x64-windows -DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=TRUE --no-warn-unused-cli -S C:/tools/06_cuda -B c:/tools/06_cuda/build -G "Visual Studio 17 2022" -T host=x64 -A x64
+[cmake] Not searching for unused variables given on the command line.
+[cmake] -- Selecting Windows SDK version 10.0.26100.0 to target Windows 6.2.9200.
+[cmake] -- Configuring done (0.0s)
+[cmake] CMake Warning (dev) in CMakeLists.txt:
+[cmake]   Policy CMP0104 is not set: CMAKE_CUDA_ARCHITECTURES now detected for NVCC,
+[cmake]   empty CUDA_ARCHITECTURES not allowed.  Run "cmake --help-policy CMP0104"
+[cmake]   for policy details.  Use the cmake_policy command to set the policy and
+[cmake]   suppress this warning.
+[cmake] 
+[cmake]   CUDA_ARCHITECTURES is empty for target "cuda01".
+[cmake] This warning is for project developers.  Use -Wno-dev to suppress it.
+[cmake] 
+[cmake] CMake Warning (dev) in CMakeLists.txt:
+[cmake]   Policy CMP0104 is not set: CMAKE_CUDA_ARCHITECTURES now detected for NVCC,
+[cmake]   empty CUDA_ARCHITECTURES not allowed.  Run "cmake --help-policy CMP0104"
+[cmake]   for policy details.  Use the cmake_policy command to set the policy and
+[cmake]   suppress this warning.
+[cmake] 
+[cmake]   CUDA_ARCHITECTURES is empty for target "cuda01".
+[cmake] This warning is for project developers.  Use -Wno-dev to suppress it.
+[cmake] 
+[cmake] CMake Warning (dev) in CMakeLists.txt:
+[cmake]   Policy CMP0104 is not set: CMAKE_CUDA_ARCHITECTURES now detected for NVCC,
+[cmake]   empty CUDA_ARCHITECTURES not allowed.  Run "cmake --help-policy CMP0104"
+[cmake]   for policy details.  Use the cmake_policy command to set the policy and
+[cmake]   suppress this warning.
+[cmake] 
+[cmake]   CUDA_ARCHITECTURES is empty for target "cuda01".
+[cmake] This warning is for project developers.  Use -Wno-dev to suppress it.
+[cmake] 
+[cmake] CMake Warning (dev) in CMakeLists.txt:
+[cmake]   Policy CMP0104 is not set: CMAKE_CUDA_ARCHITECTURES now detected for NVCC,
+[cmake]   empty CUDA_ARCHITECTURES not allowed.  Run "cmake --help-policy CMP0104"
+[cmake]   for policy details.  Use the cmake_policy command to set the policy and
+[cmake]   suppress this warning.
+[cmake] 
+[cmake]   CUDA_ARCHITECTURES is empty for target "cuda01".
+[cmake] This warning is for project developers.  Use -Wno-dev to suppress it.
+[cmake] 
+[cmake] -- Generating done (0.0s)
+[cmake] CMake Warning (dev) in CMakeLists.txt:
+[cmake]   Policy CMP0104 is not set: CMAKE_CUDA_ARCHITECTURES now detected for NVCC,
+[cmake]   empty CUDA_ARCHITECTURES not allowed.  Run "cmake --help-policy CMP0104"
+[cmake]   for policy details.  Use the cmake_policy command to set the policy and
+[cmake]   suppress this warning.
+[cmake] 
+[cmake]   CUDA_ARCHITECTURES is empty for target "cuda01".
+[cmake] This warning is for project developers.  Use -Wno-dev to suppress it.
+[cmake] 
+[cmake] CMake Warning (dev) in CMakeLists.txt:
+[cmake]   Policy CMP0104 is not set: CMAKE_CUDA_ARCHITECTURES now detected for NVCC,
+[cmake]   empty CUDA_ARCHITECTURES not allowed.  Run "cmake --help-policy CMP0104"
+[cmake]   for policy details.  Use the cmake_policy command to set the policy and
+[cmake]   suppress this warning.
+[cmake] 
+[cmake]   CUDA_ARCHITECTURES is empty for target "cuda01".
+[cmake] This warning is for project developers.  Use -Wno-dev to suppress it.
+[cmake] 
+[cmake] CMake Warning (dev) in CMakeLists.txt:
+[cmake]   Policy CMP0104 is not set: CMAKE_CUDA_ARCHITECTURES now detected for NVCC,
+[cmake]   empty CUDA_ARCHITECTURES not allowed.  Run "cmake --help-policy CMP0104"
+[cmake]   for policy details.  Use the cmake_policy command to set the policy and
+[cmake]   suppress this warning.
+[cmake] 
+[cmake]   CUDA_ARCHITECTURES is empty for target "cuda01".
+[cmake] This warning is for project developers.  Use -Wno-dev to suppress it.
+[cmake] 
+[cmake] CMake Warning (dev) in CMakeLists.txt:
+[cmake]   Policy CMP0104 is not set: CMAKE_CUDA_ARCHITECTURES now detected for NVCC,
+[cmake]   empty CUDA_ARCHITECTURES not allowed.  Run "cmake --help-policy CMP0104"
+[cmake]   for policy details.  Use the cmake_policy command to set the policy and
+[cmake]   suppress this warning.
+[cmake] 
+[cmake]   CUDA_ARCHITECTURES is empty for target "cuda01".
+[cmake] This warning is for project developers.  Use -Wno-dev to suppress it.
+[cmake] 
+[cmake] -- Build files have been written to: C:/tools/06_cuda/build
