@@ -1,16 +1,24 @@
-__global__ void operaciones(int* vector, int height) {
+__global__ void llenarMatriz(int* vector, int h, int w) {
     int id = blockIdx.x * blockDim.x + threadIdx.x;
+    int N= h*w;
 
-    if (id < height) {
-        vector[id] = (id * 5)+10; 
+
+    if (id < N) {
+
+        if((id/w)==(id%w)){
+            vector[id]=1;
+        }else{
+            vector[id]=0;
+        }
+        
     }
     
    
 }
 
-extern "C" void probar_operaciones(int* d_vector, int h) {
-    int hilos = 256;
-    int bloques = (h + hilos - 1) / hilos;
+extern "C" void probar_operaciones(int* d_vector, int h,int w) {
+    int hilos = 1024;
+    int bloques = (h*w + hilos - 1) / hilos;
     
-    operaciones<<<bloques, hilos>>>(d_vector, h);
+    llenarMatriz<<<bloques, hilos>>>(d_vector, h,w);
 }
