@@ -1,13 +1,13 @@
 [
 {
   "directory": "C:/Tools/Proyectos/CUDA/06_cuda/build",
-  "command": "C:\\PROGRA~1\\MIB055~1\\18\\COMMUN~1\\VC\\Tools\\MSVC\\1450~1.357\\bin\\Hostx64\\x64\\cl.exe  /nologo /TP -DFMT_SHARED -external:IC:\\Tools\\vcpkg\\installed\\x64-windows\\include -external:I\"C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.1\\include\" -external:I\"C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.1\\include\\cccl\" -external:W0 /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -MDd /utf-8 /FoCMakeFiles\\cuda01.dir\\main.cpp.obj /FdCMakeFiles\\cuda01.dir\\ /FS -c C:\\Tools\\Proyectos\\CUDA\\06_cuda\\main.cpp",
+  "command": "C:\\PROGRA~1\\MIB055~1\\18\\COMMUN~1\\VC\\Tools\\MSVC\\1450~1.357\\bin\\Hostx64\\x64\\cl.exe  /nologo /TP -DFMT_SHARED -external:IC:\\Tools\\vcpkg\\installed\\x64-windows\\include -external:I\"C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.1\\include\" -external:I\"C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.1\\include\\cccl\" -external:W0 /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -std:c++17 -MDd /utf-8 /FoCMakeFiles\\cuda01.dir\\main.cpp.obj /FdCMakeFiles\\cuda01.dir\\ /FS -c C:\\Tools\\Proyectos\\CUDA\\06_cuda\\main.cpp",
   "file": "C:/Tools/Proyectos/CUDA/06_cuda/main.cpp",
   "output": "C:/Tools/Proyectos/CUDA/06_cuda/build/CMakeFiles/cuda01.dir/main.cpp.obj"
 },
 {
   "directory": "C:/Tools/Proyectos/CUDA/06_cuda/build",
-  "command": "C:\\PROGRA~1\\NVIDIA~2\\CUDA\\v13.1\\bin\\nvcc.exe -forward-unknown-to-host-compiler -DFMT_SHARED -isystem C:\\Tools\\vcpkg\\installed\\x64-windows\\include -isystem \"C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.1\\include\" -isystem \"C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.1\\include\\cccl\"  -allow-unsupported-compiler -Xcompiler=\" -Zi -Ob0 -Od /RTC1\" -std=c++14 -Xcompiler=-MDd -x cu -c C:\\Tools\\Proyectos\\CUDA\\06_cuda\\kernel.cu -o CMakeFiles\\cuda01.dir\\kernel.cu.obj -Xcompiler=-FdCMakeFiles\\cuda01.dir\\,-FS",
+  "command": "C:\\PROGRA~1\\NVIDIA~2\\CUDA\\v13.1\\bin\\nvcc.exe -forward-unknown-to-host-compiler -DFMT_SHARED -isystem C:\\Tools\\vcpkg\\installed\\x64-windows\\include -isystem \"C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.1\\include\" -isystem \"C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.1\\include\\cccl\"  -allow-unsupported-compiler -Xcompiler=\" -Zi -Ob0 -Od /RTC1\" -std=c++17 -Xcompiler=-MDd -x cu -c C:\\Tools\\Proyectos\\CUDA\\06_cuda\\kernel.cu -o CMakeFiles\\cuda01.dir\\kernel.cu.obj -Xcompiler=-FdCMakeFiles\\cuda01.dir\\,-FS",
   "file": "C:/Tools/Proyectos/CUDA/06_cuda/kernel.cu",
   "output": "C:/Tools/Proyectos/CUDA/06_cuda/build/CMakeFiles/cuda01.dir/kernel.cu.obj"
 }

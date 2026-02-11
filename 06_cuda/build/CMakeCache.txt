@@ -453,6 +453,12 @@ Cuda01_IS_TOP_LEVEL:STATIC=ON
 //Value Computed by CMake
 Cuda01_SOURCE_DIR:STATIC=C:/Tools/Proyectos/CUDA/06_cuda
 
+//The directory containing a CMake configuration file for SFML.
+SFML_DIR:PATH=C:/Tools/vcpkg/installed/x64-windows/share/sfml
+
+//Path to a file.
+SFML_DOC_DIR:PATH=SFML_DOC_DIR-NOTFOUND
+
 //Automatically copy dependencies into the output directory for
 // executables.
 VCPKG_APPLOCAL_DEPS:BOOL=ON

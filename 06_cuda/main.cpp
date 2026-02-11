@@ -1,64 +1,70 @@
-#include <fmt/core.h>
-#include <cuda_runtime.h>
+#include <SFML/Graphics.hpp>
+#include <iostream>
 #include <vector>
+#include <optional> 
+#include <cstdint>  
 
+// Declaramos la función externa de CUDA
+// Nota: std::uint8_t es lo mismo que unsigned char
+extern "C" void aplicarBlurCUDA(std::uint8_t* pixels, int width, int height);
 
-extern "C" void probar_operaciones(int *d_in, int *d_out, int h, int w);
-
-int main()
-{
-    int h = 4;
-    int w = 4;
-    int N = h * w;
-    size_t size_bytes = N * sizeof(int);
-
-    // Vector original en CPU
-    std::vector<int> h_in(N);
-    // Vector resultado en CPU
-    std::vector<int> h_out(N);
-
-    // Llenamos con valores (1, 2, 3...)
-    for (int i = 0; i < N; i++) {
-        h_in[i] = i + 1;
+int main() {
+    sf::Image originalImage;
+    if (!originalImage.loadFromFile("imagen.png")) {
+        std::cerr << "Error: No se encontro 'imagen.png'" << std::endl;
+        return -1;
     }
 
-    //imprimimos la matriz original
-    fmt::print("Matriz Original:\n");
-    for (int i = 0; i < h; i++)
-    {
-        for (int j = 0; j < w; j++)
-        {
-            fmt::print("{:2} ", h_in[i * w + j]);
+    sf::Image currentImage = originalImage;
+    sf::Vector2u size = originalImage.getSize();
+    
+    unsigned int width = size.x;
+    unsigned int height = size.y;
+
+    sf::Texture texture;
+    
+    if (!texture.loadFromImage(currentImage)) return -1;
+    
+    sf::Sprite sprite(texture);
+
+    
+    sf::RenderWindow window(sf::VideoMode({width, height}), "Examen CUDA Blur");
+
+    // Loop principal
+    while (window.isOpen()) {
+        
+        
+        while (const std::optional event = window.pollEvent()) {
+            
+            if (event->is<sf::Event::Closed>()) {
+                window.close();
+            }
+
+            if (const auto* keyEvent = event->getIf<sf::Event::KeyPressed>()) {
+                
+                if (keyEvent->code == sf::Keyboard::Key::B) {
+                    std::cout << "Aplicando Blur con CUDA..." << std::endl;
+
+                    std::uint8_t* ptr = const_cast<std::uint8_t*>(currentImage.getPixelsPtr());
+
+                    aplicarBlurCUDA(ptr, width, height);
+
+                    texture.update(currentImage);
+                    std::cout << "Efecto aplicado." << std::endl;
+                }
+
+                if (keyEvent->code == sf::Keyboard::Key::R) {
+                    std::cout << "Reseteando imagen..." << std::endl;
+                    currentImage = originalImage;
+                    texture.update(currentImage);
+                }
+            }
         }
-        fmt::print("\n");
+
+        window.clear();
+        window.draw(sprite);
+        window.display();
     }
 
-    // Punteros GPU
-    int *d_in, *d_out;
-    cudaMalloc(&d_in, size_bytes);
-    cudaMalloc(&d_out, size_bytes); // CORRECCIÓN 2: Memoria para salida
-
-    // Copiamos SOLO la entrada
-    cudaMemcpy(d_in, h_in.data(), size_bytes, cudaMemcpyHostToDevice);
-
-    // Llamamos al kernel pasando entrada y salida por separado
-    probar_operaciones(d_in, d_out, h, w);
-
-    // Recuperamos SOLO la salida
-    cudaMemcpy(h_out.data(), d_out, size_bytes, cudaMemcpyDeviceToHost);
-
-    // Liberamos memoria
-    cudaFree(d_in);
-    cudaFree(d_out);
-
-    // Imprimimos la matriz RESULTANTE (Blur)
-    fmt::print("Matriz con Blur:\n");
-    for (int i = 0; i < h; i++)
-    {
-        for (int j = 0; j < w; j++)
-        {
-            fmt::print("{:2} ", h_out[i * w + j]);
-        }
-        fmt::print("\n");
-    }
+    return 0;
 }
