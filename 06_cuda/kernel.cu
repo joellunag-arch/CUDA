@@ -16,6 +16,8 @@ __global__ void productoExterno(int *d_vector, int *v, int *u, int n)
 
 extern "C" void probar_operaciones(int *d_vector, int *d_v, int *d_u, int n)
 {
+    int totalHilos=n*n;
     int hilos = 1024;
-    productoExterno<<<1, hilos>>>(d_vector,d_v, d_u, n);
+    int bloques =(totalHilos + hilos -1)/hilos;
+    productoExterno<<<bloques, hilos>>>(d_vector,d_v, d_u, n);
 }
