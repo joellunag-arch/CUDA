@@ -1,24 +1,21 @@
-__global__ void llenarMatriz(int* vector, int h, int w) {
+#include <cmath>
+__global__ void productoExterno(int *d_vector, int *v, int *u, int n)
+{
     int id = blockIdx.x * blockDim.x + threadIdx.x;
-    int N= h*w;
-
-
-    if (id < N) {
-
-        if((id/w)==(id%w)){
-            vector[id]=1;
-        }else{
-            vector[id]=0;
-        }
-        
-    }
     
-   
+
+
+    if (id < n*n)
+    {
+        int i = id / n; 
+        int j = id % n; 
+
+        d_vector[id]=v[i]*u[j];
+    }
 }
 
-extern "C" void probar_operaciones(int* d_vector, int h,int w) {
+extern "C" void probar_operaciones(int *d_vector, int *d_v, int *d_u, int n)
+{
     int hilos = 1024;
-    int bloques = (h*w + hilos - 1) / hilos;
-    
-    llenarMatriz<<<bloques, hilos>>>(d_vector, h,w);
+    productoExterno<<<1, hilos>>>(d_vector,d_v, d_u, n);
 }
