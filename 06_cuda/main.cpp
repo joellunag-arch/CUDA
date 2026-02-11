@@ -2,43 +2,62 @@
 #include <cuda_runtime.h>
 #include <vector>
 
-// Declaramos la función wrapper que escribiste en kernel.cu
-extern "C" void probar_operaciones(int *d_vector, int *d_v, int *d_u, int n);
+
+extern "C" void probar_operaciones(int *d_in, int *d_out, int h, int w);
 
 int main()
 {
-
-    std::vector<int> v = {1, 2, 3, 4};
-    std::vector<int> u = {2, 2, 2, 2};
-    int n, N;
-    n = v.size();
-    N = n * n;
+    int h = 4;
+    int w = 4;
+    int N = h * w;
     size_t size_bytes = N * sizeof(int);
-    size_t size_bytes_v = n * sizeof(int);
 
-    std::vector<int> h_vector(N, 0);
-    int *d_v, *d_u, *d_vector;
+    // Vector original en CPU
+    std::vector<int> h_in(N);
+    // Vector resultado en CPU
+    std::vector<int> h_out(N);
 
-    cudaMalloc(&d_v, size_bytes_v);
-    cudaMalloc(&d_u, size_bytes_v);
-    cudaMalloc(&d_vector,size_bytes);
+    // Llenamos con valores (1, 2, 3...)
+    for (int i = 0; i < N; i++) {
+        h_in[i] = i + 1;
+    }
 
-    cudaMemcpy(d_v, v.data(), size_bytes_v, cudaMemcpyHostToDevice);
-    cudaMemcpy(d_u, u.data(), size_bytes_v, cudaMemcpyHostToDevice);
-    probar_operaciones(d_vector,d_v, d_u, n);
-
-    cudaMemcpy(h_vector.data(), d_vector, size_bytes, cudaMemcpyDeviceToHost);
-    cudaFree(d_vector);
-    cudaFree(d_v);
-    cudaFree(d_u);
-
-    // mostrar resultado
-
-    for (int i = 0; i < n; i++)
+    //imprimimos la matriz original
+    fmt::print("Matriz Original:\n");
+    for (int i = 0; i < h; i++)
     {
-        for (int j = 0; j < n; j++)
+        for (int j = 0; j < w; j++)
         {
-            fmt::print("{} ", h_vector[i * n + j]);
+            fmt::print("{:2} ", h_in[i * w + j]);
+        }
+        fmt::print("\n");
+    }
+
+    // Punteros GPU
+    int *d_in, *d_out;
+    cudaMalloc(&d_in, size_bytes);
+    cudaMalloc(&d_out, size_bytes); // CORRECCIÓN 2: Memoria para salida
+
+    // Copiamos SOLO la entrada
+    cudaMemcpy(d_in, h_in.data(), size_bytes, cudaMemcpyHostToDevice);
+
+    // Llamamos al kernel pasando entrada y salida por separado
+    probar_operaciones(d_in, d_out, h, w);
+
+    // Recuperamos SOLO la salida
+    cudaMemcpy(h_out.data(), d_out, size_bytes, cudaMemcpyDeviceToHost);
+
+    // Liberamos memoria
+    cudaFree(d_in);
+    cudaFree(d_out);
+
+    // Imprimimos la matriz RESULTANTE (Blur)
+    fmt::print("Matriz con Blur:\n");
+    for (int i = 0; i < h; i++)
+    {
+        for (int j = 0; j < w; j++)
+        {
+            fmt::print("{:2} ", h_out[i * w + j]);
         }
         fmt::print("\n");
     }

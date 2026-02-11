@@ -1,23 +1,45 @@
-#include <cmath>
-__global__ void productoExterno(int *d_vector, int *v, int *u, int n)
+#include <cuda_runtime.h>
+
+// Recibimos INPUT (constante) y OUTPUT (donde escribimos)
+__global__ void filtroBlur(int *input, int *output, int h, int w)
 {
     int id = blockIdx.x * blockDim.x + threadIdx.x;
-    
 
-
-    if (id < n*n)
+    if(id < h * w)
     {
-        int i = id / n; 
-        int j = id % n; 
+        int sum = 0;
+        int count = 0;
+        
+        int myY = id / w;
+        int myX = id % w;
 
-        d_vector[id]=v[i]*u[j];
+        for (int dy = -1; dy <= 1; dy++)
+        {
+            for (int dx = -1; dx <= 1; dx++)
+            {
+                int neighborX = myX + dx;
+                int neighborY = myY + dy;
+
+                if (neighborX >= 0 && neighborX < w && neighborY >= 0 && neighborY < h)
+                {
+                    // Convertimos coordenada 2D -> 1D para leer memoria
+                    int neighborId = neighborY * w + neighborX;
+                    
+                    // IMPORTANTE: Leemos siempre de INPUT
+                    sum += input[neighborId];
+                    count++;
+                }
+            }
+        }
+        output[id] = sum / count;
     }
 }
 
-extern "C" void probar_operaciones(int *d_vector, int *d_v, int *d_u, int n)
+extern "C" void probar_operaciones(int *d_in, int *d_out, int h, int w)
 {
-    int totalHilos=n*n;
-    int hilos = 1024;
-    int bloques =(totalHilos + hilos -1)/hilos;
-    productoExterno<<<bloques, hilos>>>(d_vector,d_v, d_u, n);
+    int totalHilos = h * w;
+    int hilos = 256;
+    int bloques = (totalHilos + hilos - 1) / hilos;
+    
+    filtroBlur<<<bloques, hilos>>>(d_in, d_out, h, w);
 }
